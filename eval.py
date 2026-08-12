@@ -14,7 +14,7 @@ import torch
 from PIL import Image
 from torch.utils.data import DataLoader
 
-from model import build_mamba_unet
+from model import build_scm_unet
 from dataset import build_datasets
 from metrics import ConfusionMeter
 
@@ -46,8 +46,12 @@ def main():
     patch_size = train_args.get('patch_size', 4)
     num_classes = train_args.get('num_classes', 1)
 
-    model = build_mamba_unet(num_classes=num_classes, base_dim=base_dim,
-                              patch_size=patch_size, d_state=d_state).to(device)
+    model = build_scm_unet(
+        num_classes=num_classes,
+        base_dim=base_dim,
+        patch_size=patch_size,
+        d_state=d_state
+    ).to(device)
     model.load_state_dict(ckpt['model'])
     model.eval()
 
