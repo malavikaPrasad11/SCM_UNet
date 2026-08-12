@@ -584,13 +584,20 @@ class SCM_UNet(nn.Module):
         return out
 
 
-def build_scm_unet(num_classes=1, base_dim=64, patch_size=4, d_state=16):
+def build_mamba_unet(num_classes=1, base_dim=64, patch_size=4, d_state=16):
+    """Build a Mamba-UNet model from scratch."""
     return SCM_UNet(in_chans=3, num_classes=num_classes, base_dim=base_dim,
                      patch_size=patch_size, d_state=d_state)
 
 
+def build_scm_unet(num_classes=1, base_dim=64, patch_size=4, d_state=16):
+    """Backward-compatible alias for SCM-UNet."""
+    return build_mamba_unet(num_classes=num_classes, base_dim=base_dim,
+                            patch_size=patch_size, d_state=d_state)
+
+
 if __name__ == '__main__':
-    model = build_scm_unet(num_classes=1, base_dim=32, patch_size=4, d_state=8)
+    model = build_mamba_unet(num_classes=1, base_dim=32, patch_size=4, d_state=8)
     x = torch.randn(2, 3, 256, 256)
     y = model(x)
     print('output shape:', y.shape)
