@@ -24,13 +24,14 @@ use or copy the authors' original code.
 ## Repository layout
 
 ```
-scm_unet/
+.
 ├── model.py         # SCM-UNet architecture (SS2D, VSSLayer, SC-Att Bridge, KANLinear, full model)
-├── dataset.py        # Segmentation dataset + train/val/test split utilities
-├── losses.py          # BceDiceLoss
-├── metrics.py         # mIoU / DSC / Acc / Sen / Spe
-├── train.py            # Training entry point
-├── eval.py              # Standalone evaluation / inference entry point
+├── dataset.py       # Segmentation dataset + train/val/test split utilities
+├── losses.py        # BceDiceLoss
+├── metrics.py       # mIoU / DSC / Acc / Sen / Spe
+├── train.py         # Training entry point
+├── eval.py          # Standalone evaluation / inference entry point
+├── README.md        # This documentation
 └── requirements.txt
 ```
 
