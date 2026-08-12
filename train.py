@@ -24,7 +24,7 @@ import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
 
-from model import build_scm_unet
+from model import build_mamba_unet
 from dataset import build_datasets
 from losses import BceDiceLoss
 from metrics import ConfusionMeter
@@ -38,7 +38,7 @@ def set_seed(seed):
 
 
 def get_args():
-    p = argparse.ArgumentParser(description='Train SCM-UNet')
+    p = argparse.ArgumentParser(description='Train Mamba-UNet')
     p.add_argument('--data_root', type=str, required=True,
                     help='Dataset root (see dataset.py for expected layout)')
     p.add_argument('--out_dir', type=str, default='runs/scm_unet')
@@ -101,8 +101,8 @@ def main():
     test_loader = DataLoader(test_ds, batch_size=args.batch_size, shuffle=False,
                               num_workers=args.num_workers, pin_memory=True)
 
-    model = build_scm_unet(num_classes=args.num_classes, base_dim=args.base_dim,
-                            patch_size=args.patch_size, d_state=args.d_state).to(device)
+    model = build_mamba_unet(num_classes=args.num_classes, base_dim=args.base_dim,
+                              patch_size=args.patch_size, d_state=args.d_state).to(device)
     n_params = sum(p.numel() for p in model.parameters())
     print(f'Model params: {n_params / 1e6:.2f}M')
 
